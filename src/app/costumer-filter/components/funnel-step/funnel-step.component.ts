@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EventType } from '../../models/event-type';
-import { FilterQuery, FunnelStep } from '../../models/filter-query';
 import { EventOperations } from '../../constants/event-operations';
-import { EventProperty } from '../../models/event-property';
+import { EventQuery, FunnelStep } from '../../models/filter-query';
 
 @Component({
   selector: 'app-funnel-step',
@@ -15,6 +14,7 @@ export class FunnelStepComponent implements OnInit {
 
   eventType = '';
   eventProperties: string[] = [];
+  queries: Record<string, string> = {};
 
   eventOperations = EventOperations;
 
@@ -29,5 +29,25 @@ export class FunnelStepComponent implements OnInit {
   setProperty(value: string, index: number): void {
     console.log(value, index);
     this.eventProperties[index] = value;
+  }
+
+  setQuery(property: string, value: any): void {
+    console.log(property, value?.value);
+    this.queries[property] = value?.value as string;
+    console.log(this.queries);
+    console.log(this.eventProperties);
+  }
+
+  getFunnelStep(): FunnelStep {
+    const funnelStep: FunnelStep = {
+      eventType: this.eventType,
+      eventQueries: this.eventProperties.map((property) => {
+        return {
+          eventProperty: property,
+          propertyQuery: this.queries[property],
+        };
+      }),
+    };
+    return funnelStep;
   }
 }

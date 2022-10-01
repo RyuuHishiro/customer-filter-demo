@@ -1,8 +1,6 @@
-import { EventProperty } from './event-property';
-
 export interface EventType {
   type: string;
-  properties: EventProperty[];
+  properties: string[];
 }
 
 export interface EventTypesResponse {

@@ -1,11 +1,9 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { CostumerFilterPage } from './costumer-filter/pages/costumer-filter/costumer-filter.page';
 import { FunnelStepComponent } from './costumer-filter/components/funnel-step/funnel-step.component';
-import { EnvironmentService } from './costumer-filter/services/environment/environment.service';
-import { take } from 'rxjs';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';

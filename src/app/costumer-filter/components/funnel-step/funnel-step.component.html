@@ -47,7 +47,12 @@
             "
           >
             <mat-form-field class="property-input" appearance="fill">
-              <input matInput placeholder="String value" />
+              <input
+                matInput
+                placeholder="String value"
+                type="text"
+                (change)="setQuery(property, $event.target)"
+              />
             </mat-form-field>
           </ng-container>
           <ng-container
@@ -58,16 +63,35 @@
             "
           >
             <mat-form-field class="property-input" appearance="fill">
-              <input matInput placeholder="Number Value" />
+              <input
+                matInput
+                placeholder="Number Value"
+                type="number"
+                (change)="setQuery(property, $event.target)"
+              />
             </mat-form-field>
           </ng-container>
           <ng-container *ngSwitchCase="property === 'IN BETWEEN'">
             <mat-form-field class="property-input" appearance="fill">
-              <input matInput placeholder="From" />
+              <input
+                matInput
+                placeholder="From"
+                type="number"
+                (change)="setQuery(property, $event.target)"
+              />
             </mat-form-field>
             <span class="and-label">and</span>
-            <mat-form-field class="property-input" appearance="fill">
-              <input matInput placeholder="To" />
+            <mat-form-field
+              class="property-input"
+              type="number"
+              appearance="fill"
+            >
+              <input
+                matInput
+                placeholder="To"
+                type="number"
+                (change)="setQuery(property, $event.target)"
+              />
             </mat-form-field>
           </ng-container>
           <ng-container *ngSwitchDefault>

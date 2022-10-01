@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FilterEventsService } from '../../services/filter-events/filter-events.service';
 import { EventType } from '../../models/event-type';
-import { FilterQuery } from '../../models/filter-query';
+import { FilterQuery, FunnelStep } from '../../models/filter-query';
+import { FunnelStepComponent } from '../../components/funnel-step/funnel-step.component';
 
 @Component({
   selector: 'app-costumer-filter.page',
@@ -9,6 +10,9 @@ import { FilterQuery } from '../../models/filter-query';
   styleUrls: ['./costumer-filter.page.css'],
 })
 export class CostumerFilterPage implements OnInit {
+  @ViewChildren(FunnelStepComponent)
+  funnelStepComponents!: QueryList<FunnelStepComponent>;
+
   errorMessage = '';
   filterEvents: EventType[] = [];
   filterQuery: FilterQuery = { FunnelSteps: [{}] };
@@ -40,6 +44,11 @@ export class CostumerFilterPage implements OnInit {
   }
 
   onApplyFilters(): void {
-    // TODO
+    const funnelStepsComponents = this.funnelStepComponents.toArray();
+    const funnelStepsFinal: FunnelStep[] = [];
+    funnelStepsComponents.forEach((funnelStep) =>
+      funnelStepsFinal.push(funnelStep.getFunnelStep())
+    );
+    console.log(funnelStepsFinal);
   }
 }
