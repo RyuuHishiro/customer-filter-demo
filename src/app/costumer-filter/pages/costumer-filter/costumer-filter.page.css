@@ -1,0 +1,17 @@
+.filter-title {
+  font-size: 16px;
+}
+
+.customer-filter-container {
+  background: lightgrey;
+}
+
+.funnel-steps-container {
+  background: white;
+  margin: 50px;
+  padding: 10px;
+}
+
+.margin-10 {
+  margin: 10px;
+}

@@ -1,0 +1,85 @@
+<div>
+  <span class="step-title">{{ stepNumber | stepTitle: eventType }}</span>
+  <div class="step-container" fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="fill">
+      <mat-label>Event Type</mat-label>
+      <mat-select [(ngModel)]="eventType" name="filterEvent">
+        <mat-option
+          *ngFor="let filterEvent of filterEvents"
+          [value]="filterEvent.type"
+        >
+          {{ filterEvent.type }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="eventType" fxLayout="column" fxLayoutGap="10px">
+      <div
+        *ngFor="let property of eventProperties; let i = index"
+        fxLayout="row"
+      >
+        <mat-form-field appearance="fill">
+          <mat-label>Event Property</mat-label>
+          <mat-select
+            [ngModel]="property"
+            (selectionChange)="setProperty($event.value, i)"
+          >
+            <mat-option>- Empty -</mat-option>
+            <mat-optgroup
+              *ngFor="let group of eventOperations"
+              [label]="group.name"
+            >
+              <mat-option
+                *ngFor="let operation of group.operations"
+                [value]="operation.value"
+              >
+                {{ operation.viewValue }}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf="property" [ngSwitch]="true">
+          <ng-container
+            *ngSwitchCase="
+              property === 'EQUALS' ||
+              property === 'DOES NOT EQUAL' ||
+              property === 'CONTAINS' ||
+              property === 'DOES NOT CONTAIN'
+            "
+          >
+            <mat-form-field class="property-input" appearance="fill">
+              <input matInput placeholder="String value" />
+            </mat-form-field>
+          </ng-container>
+          <ng-container
+            *ngSwitchCase="
+              property === 'EQUAL TO' ||
+              property === 'LESS THAN' ||
+              property === 'GREATER THAN'
+            "
+          >
+            <mat-form-field class="property-input" appearance="fill">
+              <input matInput placeholder="Number Value" />
+            </mat-form-field>
+          </ng-container>
+          <ng-container *ngSwitchCase="property === 'IN BETWEEN'">
+            <mat-form-field class="property-input" appearance="fill">
+              <input matInput placeholder="From" />
+            </mat-form-field>
+            <span class="and-label">and</span>
+            <mat-form-field class="property-input" appearance="fill">
+              <input matInput placeholder="To" />
+            </mat-form-field>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            Invalid property: {{ property }}
+          </ng-container>
+        </ng-container>
+      </div>
+      <div>
+        <button mat-button color="primary" (click)="onRefine()">
+          {{ eventProperties.length > 0 | refineButton }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

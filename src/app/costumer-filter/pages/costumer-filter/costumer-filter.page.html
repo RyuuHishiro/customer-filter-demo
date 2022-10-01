@@ -1,0 +1,31 @@
+<div class="customer-filter-container" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <h1 class="filter-title margin-10">{{ 'Customer filter' | uppercase }}</h1>
+    <button mat-button color="warn" (click)="onDiscardFilters()">
+      Discard Filters
+    </button>
+  </div>
+  <div class="funnel-steps-container">
+    <div *ngFor="let funnelStep of filterQuery.FunnelSteps; let step = index">
+      <app-funnel-step [filterEvents]="filterEvents" [stepNumber]="step + 1">
+      </app-funnel-step>
+      <mat-divider></mat-divider>
+    </div>
+    <div fxLayoutAlign="center" class="margin-10">
+      <button mat-flat-button color="primary" (click)="onAddFunnelStep()">
+        Add Funnel Step
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <button
+      mat-flat-button
+      color="primary"
+      class="margin-10"
+      (click)="onApplyFilters()"
+    >
+      Apply Filters
+    </button>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.step-title {
+  font-size: 14px;
+  color: dimgray;
+  margin: 10px;
+}
+
+.step-container {
+  margin: 25px;
+}
+
+.property-input {
+  padding-left: 10px;
+}
+
+.and-label {
+  padding: 20px 0px 0px 10px;
+}
